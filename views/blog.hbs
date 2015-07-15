@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    {{> head}}
+
+    <body>
+        <div class="container">
+            {{> header header}}
+
+            {{> nav}}
+
+            <article>
+                <div class="image-container">
+                    <picture>
+                        <source srcset={{largeImage}} media="(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)" />
+                        
+                        <img srcset={{image}} />
+                    </picture>
+                </div>
+
+                {{{body}}}
+            </article>
+
+            {{> footer}}
+        </div>
+
+        {{> scripts}}
+    </body>
+</html>

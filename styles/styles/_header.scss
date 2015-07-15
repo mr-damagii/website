@@ -1,0 +1,55 @@
+header {
+
+    padding: {
+
+        bottom: 2rem;
+        top: 2rem;
+
+    }
+    text-align: center;
+
+    h1 {
+
+        font: {
+
+            family: 'Rock Salt';
+            size: 5.25rem;
+            weight: normal;
+
+        }
+        line-height: .8;
+        margin: {
+
+            bottom: 2rem;
+            left: auto;
+            right: auto;
+
+        }
+        max-width: 60rem;
+
+    }
+
+    p {
+
+        margin: {
+
+            left: auto;
+            right: auto;
+
+        }
+        max-width: 60rem;
+
+    }
+
+}
+
+.home header {
+
+    padding: {
+
+        bottom: 12rem;
+        top: 12rem;
+
+    }
+    
+}

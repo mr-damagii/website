@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    {{> head}}
+
+    <body>
+        <div class="container">
+            {{> header header}}
+
+            {{> nav}}
+
+            <article class="project">
+                <div class="image-container">
+                    {{{thumbnailPicture}}}
+                </div>
+
+                {{{markdown body}}}
+            </article>
+
+            {{> footer}}
+        </div>
+
+        {{> scripts}}
+    </body>
+</html>

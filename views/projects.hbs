@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    {{> head}}
+
+    <body>
+        <div class="container">
+            {{> header header}}
+
+            {{> nav}}
+
+            {{#if projects}}
+                <section class="projects">
+                    <ul>
+                        {{#each projects}}
+                            <li>
+                                <a href="/project/{{url}}">
+                                    <div class="image-container">
+                                        {{{thumbnailPicture header.thumbnail header.largeThumbnail}}}
+                                    </div>
+
+                                    <div>
+                                        <h3>{{header.title}}</h3>
+                                    </div>
+
+                                    <div>
+                                        <p>{{header.summary}}</p>
+                                    </div>
+                                </a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </section>
+            {{else}}
+                {{> nothing}}
+            {{/if}}
+
+            {{> footer}}
+        </div>
+
+        {{> scripts}}
+    </body>
+</html>

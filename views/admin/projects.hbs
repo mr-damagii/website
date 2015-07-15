@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    {{> head}}
+
+    <body>
+        <div class="container admin">
+            {{> header header}}
+
+            {{> nav}}
+
+            <section class="projects">
+                <a href="/admin/project/new">New...</a>
+                <ul>
+                    {{#each projects}}
+                        <li>
+                            <a href="/admin/project/delete/{{_id}}">Delete</a>
+
+                            <a href="/admin/project/{{_id}}">
+                                <div class="image-container">
+                                    {{{thumbnailPicture header.thumbnail header.largeThumbnail}}}
+                                </div>
+
+                                <div>
+                                    <h3>{{header.title}}</h3>
+                                </div>
+
+                                <div>
+                                    <p>{{header.summary}}</p>
+                                </div>
+                            </a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </section>
+
+            {{> footer}}
+        </div>
+
+        {{> scripts}}
+    </body>
+</html>

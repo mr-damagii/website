@@ -1,0 +1,48 @@
+.projects {
+
+    ul {
+
+        align-items: flex-start;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style-type: none;
+
+    }
+
+    li {
+
+        display: block;
+        margin: 2rem;
+
+        a {
+
+            @include transition(opacity .1s linear);
+
+            display: block;
+            width: 285px;
+            text-decoration: none;
+
+            &:hover {
+
+                opacity: .6;
+
+            }
+
+        }
+
+    }
+
+}
+
+.project {
+
+    margin: {
+
+        left: auto;
+        right: auto;
+
+    }
+    max-width: 40rem;
+
+}

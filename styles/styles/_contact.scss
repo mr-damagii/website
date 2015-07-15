@@ -1,0 +1,49 @@
+.contact {
+
+    h2 {
+
+        font: {
+
+            size: 1.1rem;
+
+        }
+        text-align: center;
+
+    }
+
+    ul {
+
+        align-items: flex-start;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style-type: none;
+
+    }
+
+    li {
+
+        a {
+
+            @include transition(opacity .1s linear);
+
+            display: block;
+            height: 5rem;
+            width: 5rem;
+
+            &:hover {
+
+                opacity: .6;
+
+            }
+        }
+
+        svg {
+
+            fill: grey;
+
+        }
+
+    }
+
+}

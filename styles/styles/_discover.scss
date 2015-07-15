@@ -1,0 +1,71 @@
+.discover-container {
+
+    background: {
+
+        color: #ff533e;
+        image: url('/client/images/thumbnail/bg-red.png_1200x800.png');
+        position: center center;
+        size: cover;
+
+    }
+    height: 520px;
+
+    .discover {
+
+        margin: {
+
+            left: auto;
+            right: auto;
+
+        }
+        max-width: 43rem;
+        padding-top: 3rem;
+        text-align: center;
+
+    }
+
+    h2 {
+
+        color: white;
+        font-size: 3.5rem;
+
+    }
+
+    a {
+
+        @include transition(opacity .1s linear);
+
+        border: 1px solid white;
+        border-radius: 4px;
+        color: white;
+        display: block;
+        font: {
+
+            family: 'Didact Gothic';
+            weight: 300;
+            size: 1rem;
+            align: center;
+
+        }
+        letter-spacing: .05em;
+        margin: {
+
+            top: 3rem;
+            right: auto;
+            left: auto;
+
+        }
+        max-width: 17rem;
+        padding: 1.3rem;
+        text-decoration: none;
+        width: 90%;
+
+        &:hover {
+
+            opacity: .6;
+
+        }
+
+    }
+
+}

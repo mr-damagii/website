@@ -1,0 +1,67 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/picturefill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    var app = {
+
+        toggleNav: function () {
+
+            $('nav').toggleClass('open');
+
+        },
+
+
+        hideNav: function () {
+
+            $('nav').removeClass('open');
+            $('nav').scrollTop(0);
+
+        }
+
+    };
+
+    $('nav .menu-control').on('click', function (e) {
+
+        app.toggleNav();
+
+    });
+
+    $('.lines-button.x').on('click', function (e) {
+
+        $('.lines-button.x').toggleClass('open');
+
+    });
+
+    $(window).on('click', function (e) {
+
+        var $tar = $(e.target);
+
+        if (!$tar.is($('nav'))) {
+
+            var hasParent = false;
+
+            var $p = $tar.parents();
+            for (var i = 0; i < $p.length; i++) {
+
+                if (!hasParent && $($p.get(i)).is($('nav'))) {
+
+                    hasParent = true;
+
+                }
+
+            }
+
+            if (!hasParent) {
+
+                app.hideNav();
+
+            }
+
+        }
+
+    });
+</script>
+
+<script type='text/javascript' id="__bs_script__">//<![CDATA[
+document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.7.13.js'><\/script>".replace("HOST", location.hostname));
+//]]></script>

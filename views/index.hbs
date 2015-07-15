@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    {{> head}}
+
+    <body>
+        <div class="container home">
+            {{> header header}}
+
+            {{> nav}}
+
+            <div class="discover-container content-container">
+                <div class="discover">
+                    <h2>have a look at what i've been up to...</h2>
+
+                    <a class="button" href="/projects">My Projects</a>
+                </div>
+            </div>
+
+            {{#with preview}}
+                <div class="preview-list-component content-container">
+                    <h2>{{header}}</h2>
+
+                    <ul class="preview-list">
+                        {{#each items}}
+                            <li>
+                                <a href="project/{{url}}">
+                                    <div class="image-container">
+                                        {{{thumbnailPicture header.thumbnail header.largeThumbnail}}}
+                                    </div>
+
+                                    <div>
+                                        <h3>{{header.title}}</h3>
+                                    </div>
+
+                                    <div>
+                                        <p>{{header.summary}}</p>
+                                    </div>
+                                </a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/with}}
+
+            {{> footer}}
+        </div>
+
+        {{> scripts}}
+    </body>
+</html>

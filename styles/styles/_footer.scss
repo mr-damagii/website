@@ -1,0 +1,126 @@
+.footer-container {
+
+    background: {
+
+        color: #34004b;
+        position: center center;
+        size: cover;
+
+    }
+    color: white;
+    margin: {
+
+        right: auto;
+        left: auto;
+        top: 4rem;
+
+    }
+    min-height: 7.5rem;
+    padding: {
+
+        top: 5rem;
+        bottom: 5rem;
+
+    }
+
+    footer {
+
+        margin: {
+
+            left: auto;
+            right: auto;
+
+        }
+        max-width: 60rem;
+
+    }
+
+    h4, p, .contacts-container {
+
+        max-width: 30rem;
+
+    }
+
+    h4, p {
+
+        color: white;
+
+    }
+
+    h4 {
+
+        font: {
+
+            size: 2rem;
+            weight: normal;
+
+        }
+        margin-top: 0;
+
+    }
+
+    p {
+        
+        font-size: 1.1rem;
+        margin-bottom: 0;
+
+    }
+
+    .contacts {
+
+        display: inline-block;
+        list-style-type: none;
+        padding-left: 0;
+
+    }
+
+    li {
+
+        float: left;
+        padding: .4rem;
+
+        a {
+
+            @include transition(opacity .1s linear);
+
+            display: block;
+            height: 3rem;
+            width: 3rem;
+
+            &:hover {
+
+                opacity: .6;
+
+            }
+        }
+
+        svg {
+
+            fill: white;
+
+        }
+
+    }
+
+    .mail {
+
+        @include transition(opacity .1s linear);
+
+        color: #00db92;
+        font: {
+
+            family: 'Didact Gothic';
+            size: 1.1rem;
+
+        }
+        text-decoration: none;
+
+        &:hover {
+
+            opacity: .6;
+
+        }
+
+    }
+
+}

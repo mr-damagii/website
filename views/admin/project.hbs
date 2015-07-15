@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    {{> head}}
+
+    <body>
+        <div class="container admin">
+            {{> header header}}
+
+            {{> nav}}
+
+            <form method="POST" action="/admin/project/{{#if _id}}{{_id}}{{else}}new{{/if}}">
+                <input type="hidden" name="_id" value="{{_id}}" />
+
+                <div class="form-field">
+                    <label for="header.title">Title</label>
+
+                    <input type="text" name="header.title" value="{{header.title}}" />
+                </div>
+
+                <div class="form-field">
+                    <label for="header.title">Summary</label>
+
+                    <input type="text" name="header.summary" value="{{header.summary}}" />
+                </div>
+
+                <div class="form-field">
+                    <label for="header.thumbnail">Thumbnail (small)</label>
+
+                    <input type="text" name="header.thumbnail" value="{{header.thumbnail}}" />
+                </div>
+
+                <div class="form-field">
+                    <label for="header.largeThumbnail">Thumbnail (large)</label>
+
+                    <input type="text" name="header.largeThumbnail" value="{{header.largeThumbnail}}" />
+                </div>
+
+                <div class="form-field">
+                    <label for="url">Url</label>
+
+                    <input type="text" name="url" value="{{url}}" />
+                </div>
+
+                <div class="form-field">
+                    <label for="image">Image (small)</label>
+
+                    <input type="text" name="image" value="{{image}}" />
+                </div>
+
+                <div class="form-field">
+                    <label for="largeImage">Image (large)</label>
+
+                    <input type="text" name="largeImage" value="{{largeImage}}" />
+                </div>
+
+                <div class="form-field">
+                    <label for="body">Body</label>
+
+                    <textarea name="body">{{body}}</textarea>
+                </div>
+
+                <div class="form-field">
+                    <label for="created">Created</label>
+
+                    <input type="text" name="created" value="{{created}}" />
+                </div>
+
+                <div class="form-field">
+                    <label for="published">Published</label>
+
+                    <input type="text" name="published" value="{{published}}" />
+                </div>
+
+                <input type="submit" />
+            </form>
+
+            {{> footer}}
+        </div>
+
+        {{> scripts}}
+    </body>
+</html>
