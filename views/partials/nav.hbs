@@ -1,25 +1,17 @@
 <nav>
     <button class="menu-control">
         <span class="base">
-            <?xml version="1.0" encoding="utf-8"?>
-            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 width="32px" height="32px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-            <path id="menu-2-icon" d="M123.027,413.5H50v-65h73.027V413.5z M123.027,223.5H50v65h73.027V223.5z M123.027,98.5H50v65h73.027V98.5
-                z M168.027,98.5v65H462v-65H168.027z M168.027,288.5H462v-65H168.027V288.5z M168.027,413.5H462v-65H168.027V413.5z"/>
-            </svg>
+            {{> icons/menu}}
         </span>
 
         <span class="open">
-            <?xml version="1.0" encoding="utf-8"?>
-            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 width="32px" height="32px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-            <polygon id="x-mark-icon" points="438.393,374.595 319.757,255.977 438.378,137.348 374.595,73.607 255.995,192.225 137.375,73.622 
-                73.607,137.352 192.246,255.983 73.622,374.625 137.352,438.393 256.002,319.734 374.652,438.378 "/>
-            </svg>
+            {{> icons/close}}
         </span>
     </button>
+
+    <a class="menu-home button" href="/">
+        {{> icons/home}}
+    </a>
 
     <ul class="nav-content">
         <li>

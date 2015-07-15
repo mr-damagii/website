@@ -37,7 +37,7 @@ app.get('/', function (req, res) {
                 header: {
 
                     title: 'Adam Kent',
-                    summary: 'Making software both intuitive and easy on the eyes'
+                    summary: 'Making the internet look good, one site at a time.'
 
                 },
 

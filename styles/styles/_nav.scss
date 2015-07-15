@@ -28,6 +28,12 @@ nav {
 
         }
 
+        .menu-home {
+
+            display: none;
+
+        }
+
         li a {
 
             display: block;
@@ -36,7 +42,7 @@ nav {
 
     }
 
-    .menu-control {
+    .menu-control, .menu-home {
 
         background: none;
         border: none;
@@ -44,8 +50,22 @@ nav {
         float: right;
         outline: none;
         position: relative;
+        transition: opacity .1s linear;
         height: $menu-bar-closed-size;
         width: $menu-bar-closed-size;
+
+        &:hover {
+
+            opacity: .6;
+
+        }
+
+        span, svg {
+
+            height: 2.2rem;
+            min-width: 2.2rem;
+
+        }
 
         span {
 
@@ -54,8 +74,16 @@ nav {
             bottom: 0;
             left: 0;
             right: 0;
+
+        }
+
+    }
+
+    .menu-control {
+
+        span {
+
             opacity: 0;
-            transition: opacity .1s linear;
 
         }
 
@@ -63,6 +91,23 @@ nav {
 
             opacity: 1;
         
+        }
+
+    }
+
+    .menu-home {
+
+        clear: right;
+        display: block;
+
+        svg {
+
+            position: absolute;
+            top: 7px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
         }
 
     }
