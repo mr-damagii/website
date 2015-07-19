@@ -13,6 +13,9 @@ module.exports = function (app) {
                     .status(projects.length ? 200 : 404)
                     .render('projects.hbs', {
 
+                        pagetitle: 'Projects',
+
+
                         header: {
 
                             title: 'Projects',
@@ -47,6 +50,8 @@ module.exports = function (app) {
                     return;
 
                 }
+
+                proj.pagetitle = proj.title;
 
                 res.render('project.hbs', proj);
 

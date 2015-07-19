@@ -57,6 +57,9 @@ app.get('/about', function (req, res) {
 
     res.render('about.hbs', {
 
+        pagetitle: 'About Me',
+
+
         header: {
 
             title: 'About Me'
