@@ -1,7 +1,13 @@
-<header class="content-container">
-    <h1>{{title}}</h1>
+<div class="header-container">
+    <header>
+        <h1>{{title}}</h1>
 
-    {{#if summary}}
-        <p>{{summary}}</p>
-    {{/if}}
-</header>
+        {{#if summary}}
+            <p>{{summary}}</p>
+        {{/if}}
+
+        {{#if image}}
+            {{{picture image}}}
+        {{/if}}
+    </header>
+</div>

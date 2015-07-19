@@ -1,22 +1,17 @@
 .nothing {
 
+    @include container-content();
+
     margin: {
 
-        left: auto;
-        right: auto;
+        bottom: 5rem;
+        top: 5rem;
 
     }
-    max-width: 40rem;
-
-    h1 {
-
-        text-align: center;
-
-    }
+    text-align: center;
 
     .nothing-icon {
 
-        fill: grey;
         height: 5rem;
         margin: {
 
@@ -24,7 +19,7 @@
             right: auto;
 
         }
-        width: 4rem;
+        width: 5rem;
 
     }
 

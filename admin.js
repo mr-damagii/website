@@ -20,7 +20,7 @@ app.engine('hbs', hbs.express4({
 var projectService = require('./services/projectService')();
 
 require('./views/helpers/reactHelper')(hbs);
-require('./views/helpers/thumbnailPictureHelper')(hbs);
+require('./views/helpers/pictureHelper')(hbs);
 require('./views/helpers/markdownHelper')(hbs);
 
 app.set('view engine', 'hbs');

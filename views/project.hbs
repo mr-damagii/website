@@ -4,16 +4,12 @@
     {{> head}}
 
     <body>
-        <div class="container">
-            {{> header header}}
-
+        <div class="container project">
             {{> nav}}
 
-            <article class="project">
-                <div class="image-container">
-                    {{{thumbnailPicture}}}
-                </div>
-
+            {{> header this}}
+            
+            <article>
                 {{{markdown body}}}
             </article>
 

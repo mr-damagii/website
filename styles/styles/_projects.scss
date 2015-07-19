@@ -1,48 +1,222 @@
 .projects {
 
-    ul {
+    .header-container {
 
-        align-items: flex-start;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        list-style-type: none;
+        height: 15rem;
 
     }
 
-    li {
+    .project-list {
 
-        display: block;
-        margin: 2rem;
+        @include container-content();
 
-        a {
+        ul {
 
-            @include transition(opacity .1s linear);
+            list-style-type: none;
+            padding: 0;
+
+        }
+
+        li a, picture, img {
+
+            width: 100%;
+
+        }
+
+        li {
+
+            margin-top: 2rem;
+
+            &:first-child {
+
+                margin-top: 0;
+
+            }
+
+        }
+
+        li a {
+
+            color: #111;
+            text-decoration: none;
+
+        }
+
+        picture {
 
             display: block;
-            width: 285px;
-            text-decoration: none;
+
+            img {
+
+                display: block;
+
+            }
+
+        }
+
+        h3 {
+
+            font: {
+
+                family: 'Josefin Slab';
+                size: 2rem;
+
+            }
+            line-height: 2.4rem;
+            margin: 0;
+
+        }
+
+        p {
+
+            font: {
+
+                family: 'Open Sans';
+                size: 1.25rem;
+                weight: 300;
+
+            }
+            line-height: 2.4rem;
+            margin: 0;
+            margin-top: .6rem;
+
+        }
+
+        aside div {
+
+            background: #fff;
+            padding: 1.5rem;
+
+        }
+
+    }
+
+    @media (min-width: $breakpoint-large) {
+
+        .header-container {
+
+            height: 20rem;
+
+        }
+
+        .project-list li {
+
+            height: 17.5rem;
+            overflow: hidden;
+            position: relative;
+
+            &.alt {
+
+                &:hover {
+
+                    aside {
+
+                        transform: translateX(-100%);
+
+                    }
+
+                }
+
+                aside {
+
+                    left: 0;
+                    right: 50%;
+
+                }
+
+            }
+
+            &:first-child {
+
+                margin-top: 0;
+
+            }
 
             &:hover {
 
-                opacity: .6;
+                picture {
+
+                    transform: scale(1.1);
+
+                }
+
+                aside {
+
+                    transform: translateX(100%);
+
+                }
+
+            }
+
+            a {
+
+                color: #111;
+
+            }
+
+            picture {
+
+                @include transition(transform .1s);
+
+                align-content: center;
+                align-items: center;
+                bottom: 0;
+                display: flex;
+                justify-content: center;
+                left: 0;
+                overflow: hidden;
+                position: absolute;
+                right: 0;
+                top: 0;
+
+            }
+
+            img {
+
+                height: auto;
+                width: 100%;
+
+            }
+
+            aside {
+
+                @include transition(transform .1s);
+
+                align-content: center;
+                align-items: center;
+                bottom: 0;
+                display: flex;
+                left: 50%;
+                position: absolute;
+                right: 0;
+                top: 0;
+
+                &::after {
+
+                    background: #fff;
+                    bottom: 0;
+                    content: '';
+                    left: 0;
+                    opacity: .9;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+
+                }
+
+                div {
+
+                    background: none;
+                    padding: 2.5rem;
+                    position: relative;
+                    z-index: 1;
+
+                }
 
             }
 
         }
 
     }
-
-}
-
-.project {
-
-    margin: {
-
-        left: auto;
-        right: auto;
-
-    }
-    max-width: 40rem;
 
 }

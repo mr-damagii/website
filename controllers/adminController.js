@@ -86,6 +86,8 @@ module.exports = function (app) {
 
     app.post('/admin/project/:projectId', urlBodyParser, function (req, res) {
 
+        console.log(req.body);
+
         var b = req.body;
         b._id = b._id ? 
             new ObjectId(b._id) : 

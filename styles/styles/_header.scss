@@ -1,55 +1,85 @@
-header {
+.header-container {
 
-    padding: {
+    background-color: #000;
+    border-bottom: 2rem solid #d3b95c;
+    height: 34rem;
+    position: relative;
 
-        bottom: 2rem;
-        top: 2rem;
+    header {
+
+        align-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        text-align: center;
+        text-transform: uppercase;
+        z-index: 1;
+
+        picture {
+
+            bottom: 0;
+            content: '';
+            left: 0;
+            opacity: 0.35;
+            overflow: hidden;
+            position: absolute;
+            right: 0;
+            top: 0;
+
+        }
 
     }
-    text-align: center;
 
     h1 {
 
+        @include container-content();
+
+        color: #d3b95c;
         font: {
 
-            family: 'Rock Salt';
-            size: 5.25rem;
+            family: 'Josefin Slab';
+            size: 3rem;
             weight: normal;
 
         }
-        line-height: .8;
-        margin: {
+        z-index: 1;
 
-            bottom: 2rem;
-            left: auto;
-            right: auto;
+        span {
+
+            display: block;
 
         }
-        max-width: 60rem;
 
     }
 
     p {
+        
+        @include container-content();
+        
+        color: #d3b95c;
+        font: {
 
-        margin: {
-
-            left: auto;
-            right: auto;
+            family: 'Josefin Slab';
+            size: 2rem;
+            weight: normal;
 
         }
-        max-width: 60rem;
+        z-index: 1;
 
     }
 
-}
+    @media (min-width: $breakpoint-large) {
 
-.home header {
+        height: 43.75rem;
 
-    padding: {
+        h1 {
 
-        bottom: 12rem;
-        top: 12rem;
+            font-size: 4.5rem;
+
+        }
 
     }
-    
+
 }

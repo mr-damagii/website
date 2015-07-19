@@ -1,39 +1,11 @@
 body {
 
-    background: #333;
-    color: grey;
+    font-family: 'Open Sans';
 
 }
 
-h1, 
-h2, 
-h3, 
-h4, 
-h5, 
-h6,
-p,
-a {
+h1, h2, h3, h4, h5, h6 {
 
-    color: grey;
-    font-family: 'Didact Gothic';
-
-}
-
-.container {
-
-    background: white;
-    padding-left: $menu-bar-closed-size;
-    position: relative;
-
-}
-
-.content-container {
-
-    padding: {
-
-        left: $content-padding;
-        right: $content-padding;
-
-    }
+    font-family: 'Josefin Slab';
 
 }

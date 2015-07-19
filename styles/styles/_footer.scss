@@ -1,123 +1,92 @@
 .footer-container {
 
-    background: {
-
-        color: #34004b;
-        position: center center;
-        size: cover;
-
-    }
-    color: white;
-    margin: {
-
-        right: auto;
-        left: auto;
-        top: 4rem;
-
-    }
-    min-height: 7.5rem;
-    padding: {
-
-        top: 5rem;
-        bottom: 5rem;
-
-    }
+    background: #000;
+    border-top: 2rem solid #d6b962;
 
     footer {
 
-        margin: {
+        @include container-content();
 
-            left: auto;
-            right: auto;
+        padding: {
+
+            bottom: 3rem;
+            top: 3rem;
 
         }
-        max-width: 60rem;
+        text-align: center;
 
     }
 
-    h4, p, .contacts-container {
+    h2, p {
 
-        max-width: 30rem;
-
-    }
-
-    h4, p {
-
-        color: white;
-
-    }
-
-    h4 {
-
+        color: #d6b962;
         font: {
 
-            size: 2rem;
+            family: 'Josefin Slab';
             weight: normal;
 
         }
-        margin-top: 0;
+        margin: 0;
+        text-transform: uppercase;
+
+    }
+
+    h2 {
+
+        font-size: 4.2rem;
 
     }
 
     p {
-        
-        font-size: 1.1rem;
-        margin-bottom: 0;
+
+        font-size: 2rem;
 
     }
 
-    .contacts {
+    ul {
 
-        display: inline-block;
-        list-style-type: none;
-        padding-left: 0;
+        align-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        margin-top: 2rem;
+        padding: 0;
 
-    }
+        li {
 
-    li {
+            height: 8.25rem;
+            width: 8.25rem;
 
-        float: left;
-        padding: .4rem;
+        }
 
         a {
 
-            @include transition(opacity .1s linear);
+            @include transition(opacity .1s);
 
             display: block;
-            height: 3rem;
-            width: 3rem;
+            fill: #777;
 
             &:hover {
 
                 opacity: .6;
 
             }
-        }
-
-        svg {
-
-            fill: white;
 
         }
 
     }
 
-    .mail {
+    @media (min-width: $breakpoint-large) {
 
-        @include transition(opacity .1s linear);
+        footer {
 
-        color: #00db92;
-        font: {
+            padding: {
 
-            family: 'Didact Gothic';
-            size: 1.1rem;
+                bottom: 7.5rem;
+                top: 7.5rem;
 
-        }
-        text-decoration: none;
-
-        &:hover {
-
-            opacity: .6;
+            }
 
         }
 

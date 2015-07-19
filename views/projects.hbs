@@ -4,28 +4,26 @@
     {{> head}}
 
     <body>
-        <div class="container">
-            {{> header header}}
-
+        <div class="container projects">
             {{> nav}}
 
+            {{> header header}}
+
             {{#if projects}}
-                <section class="projects">
+                <section class="project-list">
                     <ul>
                         {{#each projects}}
-                            <li>
+                            <li {{#if_even @index}}class="alt"{{/if_even}}>
                                 <a href="/project/{{url}}">
-                                    <div class="image-container">
-                                        {{{thumbnailPicture header.thumbnail header.largeThumbnail}}}
-                                    </div>
+                                    {{{picture thumbnail largeThumbnail}}}
 
-                                    <div>
-                                        <h3>{{header.title}}</h3>
-                                    </div>
+                                    <aside>
+                                        <div>
+                                            <h3>{{title}}</h3>
 
-                                    <div>
-                                        <p>{{header.summary}}</p>
-                                    </div>
+                                            <p>{{summary}}</p>
+                                        </div>
+                                    </aside>
                                 </a>
                             </li>
                         {{/each}}

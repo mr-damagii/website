@@ -5,43 +5,51 @@
 
     <body>
         <div class="container home">
-            {{> header header}}
-
             {{> nav}}
 
-            <div class="discover-container content-container">
-                <div class="discover">
-                    <h2>have a look at what i've been up to...</h2>
+            <div class="home-header-container">
+                <header>
+                    <h1>
+                        <span>Hello, I'm Adam.</span>
 
-                    <a class="button" href="/projects">My Projects</a>
-                </div>
+                        <span class="tagline">I Write Software.</span>
+                    </h1>
+                </header>
             </div>
 
-            {{#with preview}}
-                <div class="preview-list-component content-container">
-                    <h2>{{header}}</h2>
+            <section class="intro-container">
+                <div class="intro">
+                    <p><span>I'm a front-end web developer.</span> I write HTML, client-side JavaScript, and CSS. I translate Photoshop and Illustrator designs into web pages. I deal with browser compatibility and I handle user interactions.</p>
 
-                    <ul class="preview-list">
-                        {{#each items}}
-                            <li>
-                                <a href="project/{{url}}">
-                                    <div class="image-container">
-                                        {{{thumbnailPicture header.thumbnail header.largeThumbnail}}}
-                                    </div>
+                    <p><span>I'm also a back-end web developer.</span> I write C#, server-side JavaScript and the occasional bit of PHP. I program content management systems, classified systems and API's. I design databases and write SQL (or NoSQL).</p>
+                </div>
+            </section>
 
-                                    <div>
-                                        <h3>{{header.title}}</h3>
-                                    </div>
+            <section class="recent-container">
+                <div class="recent">
+                    <div class="recent-header">
+                        <h2>Recent Projects</h2>
+                    </div>
 
-                                    <div>
-                                        <p>{{header.summary}}</p>
-                                    </div>
+                    <ol>
+                        {{#each preview.items}}
+                            <li {{#if_even @index}}class="alt"{{/if_even}}>
+                                <a href="/project/{{url}}">
+                                    {{{picture thumbnail largeThumbnail}}}
+
+                                    <aside>
+                                        <div>
+                                            <h3>{{title}}</h3>
+
+                                            <p>{{summary}}</p>
+                                        </div>
+                                    </aside>
                                 </a>
                             </li>
                         {{/each}}
-                    </ul>
+                    </ol>
                 </div>
-            {{/with}}
+            </section>
 
             {{> footer}}
         </div>

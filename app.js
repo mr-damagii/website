@@ -19,8 +19,9 @@ app.engine('hbs', hbs.express4({
 
 var projectService = require('./services/projectService')();
 
+require('./views/helpers/ifEvenHelper')(hbs);
 require('./views/helpers/reactHelper')(hbs);
-require('./views/helpers/thumbnailPictureHelper')(hbs);
+require('./views/helpers/pictureHelper')(hbs);
 require('./views/helpers/markdownHelper')(hbs);
 
 app.set('view engine', 'hbs');
@@ -33,14 +34,6 @@ app.get('/', function (req, res) {
         function (err, projects) {
 
             res.render('index.hbs', {
-
-                header: {
-
-                    title: 'Adam Kent',
-                    summary: 'Making the internet look good, one site at a time.'
-
-                },
-
 
                 preview: {
 
@@ -60,14 +53,13 @@ app.get('/', function (req, res) {
 require('./controllers/projectController')(app);
 require('./controllers/blogController')(app);
 
-app.get('/contact', function (req, res) {
+app.get('/about', function (req, res) {
 
-    res.render('contact.hbs', {
+    res.render('about.hbs', {
 
         header: {
 
-            title: 'Contact Me',
-            summary: 'Find me out and about on the following services or just drop me an email...'
+            title: 'About Me'
 
         }
 
