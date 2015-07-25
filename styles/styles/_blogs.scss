@@ -1,161 +1,110 @@
 .blogs {
-
     .header-container {
-
         height: 15rem;
-
     }
 
     .blog-list {
-
         @include container-content();
 
         ul {
-
             list-style-type: none;
             padding: 0;
-
         }
 
         li a, picture, img {
-
             width: 100%;
-
         }
 
         li {
-
             margin-top: 2rem;
 
             &:first-child {
-
                 margin-top: 0;
-
             }
-
         }
 
         li a {
-
             color: #111;
             text-decoration: none;
-
         }
 
         picture {
-
             display: block;
 
             img {
-
                 display: block;
-
             }
-
         }
 
         h3 {
-
             font: {
-
                 family: 'Josefin Slab';
                 size: 2rem;
-
             }
             line-height: 2.4rem;
             margin: 0;
-
         }
 
         p {
-
             font: {
-
                 family: 'Open Sans';
                 size: 1.25rem;
                 weight: 300;
-
             }
             line-height: 2.4rem;
             margin: 0;
             margin-top: .6rem;
-
         }
 
         aside div {
-
             background: #fff;
             padding: 1.5rem;
-
         }
-
     }
 
     @media (min-width: $breakpoint-large) {
-
         .header-container {
-
             height: 20rem;
-
         }
 
         .blog-list li {
-
             height: 17.5rem;
             overflow: hidden;
             position: relative;
 
             &.alt {
-
                 &:hover {
-
                     aside {
-
                         transform: translateX(-100%);
 
                     }
-
                 }
 
                 aside {
-
                     left: 0;
                     right: 50%;
-
                 }
-
             }
 
             &:first-child {
-
                 margin-top: 0;
-
             }
 
             &:hover {
-
                 picture {
-
                     transform: scale(1.1);
-
                 }
 
                 aside {
-
                     transform: translateX(100%);
-
                 }
-
             }
 
             a {
-
                 color: #111;
-
             }
 
             picture {
-
                 @include transition(transform .1s);
 
                 align-content: center;
@@ -168,18 +117,14 @@
                 position: absolute;
                 right: 0;
                 top: 0;
-
             }
 
             img {
-
                 height: auto;
                 width: 100%;
-
             }
 
             aside {
-
                 @include transition(transform .1s);
 
                 align-content: center;
@@ -192,7 +137,6 @@
                 top: 0;
 
                 &::after {
-
                     background: #fff;
                     bottom: 0;
                     content: '';
@@ -201,22 +145,15 @@
                     position: absolute;
                     right: 0;
                     top: 0;
-
                 }
 
                 div {
-
                     background: none;
                     padding: 2.5rem;
                     position: relative;
                     z-index: 1;
-
                 }
-
             }
-
         }
-
     }
-
 }

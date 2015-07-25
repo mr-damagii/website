@@ -1,17 +1,11 @@
 @mixin container-content() {
-
     margin: {
-
         left: auto;
         right: auto;
-
     }
     max-width: 42rem;
     padding: {
-
         left: 1rem;
         right: 1rem;
-
     }
-
 }

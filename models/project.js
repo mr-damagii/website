@@ -1,5 +1,4 @@
 module.exports = function (props) {
-
     this._id = (props || {})._id;
 
     this.thumbnail = (props || {}).thumbnail;
@@ -15,5 +14,4 @@ module.exports = function (props) {
 
     this.created = (props || {}).created;
     this.published = (props || {}).published;
-
 };

@@ -1,65 +1,43 @@
 .intro-container {
-
     .intro {
-
         @include container-content();
 
         padding: {
-
             bottom: 3rem;
             top: 3rem;
-
         }
-
     }
 
     p {
-
         color: #111;
         font: {
-
             family: 'Open Sans';
             size: 1.25rem;
             weight: 300;
-
         }
         line-height: 2.4rem;
         margin-top: 3rem;
 
         &:first-child {
-
             margin-top: 0;
-
         }
 
         span {
-
             display: block;
             font: {
-
                 family: 'Josefin Slab';
                 size: 2rem;
                 weight: bold;
-
             }
-
         }
-
     }
 
     @media (min-width: $breakpoint-large) {
-
         .intro {
-
             padding: {
-
                 bottom: 7.5rem;
                 top: 7.5rem;
-
             }
-
         }
-
     }
-
 }

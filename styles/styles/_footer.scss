@@ -1,50 +1,36 @@
 .footer-container {
-
     background: #000;
     border-top: 2rem solid #d6b962;
 
     footer {
-
         @include container-content();
 
         padding: {
-
             bottom: 3rem;
             top: 3rem;
-
         }
         text-align: center;
-
     }
 
     h2, p {
-
         color: #d6b962;
         font: {
-
             family: 'Josefin Slab';
             weight: normal;
-
         }
         margin: 0;
         text-transform: uppercase;
-
     }
 
     h2 {
-
         font-size: 4.2rem;
-
     }
 
     p {
-
         font-size: 2rem;
-
     }
 
     ul {
-
         align-content: center;
         align-items: center;
         display: flex;
@@ -54,42 +40,28 @@
         padding: 0;
 
         li {
-
             height: 8.25rem;
             width: 8.25rem;
-
         }
 
         a {
-
             @include transition(opacity .1s);
 
             display: block;
             fill: #777;
 
             &:hover {
-
                 opacity: .6;
-
             }
-
         }
-
     }
 
     @media (min-width: $breakpoint-large) {
-
         footer {
-
             padding: {
-
                 bottom: 7.5rem;
                 top: 7.5rem;
-
             }
-
         }
-
     }
-
 }

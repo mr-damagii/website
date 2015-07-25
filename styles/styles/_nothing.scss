@@ -1,26 +1,18 @@
 .nothing {
-
     @include container-content();
 
     margin: {
-
         bottom: 5rem;
         top: 5rem;
-
     }
     text-align: center;
 
     .nothing-icon {
-
         height: 5rem;
         margin: {
-
             left: auto;
             right: auto;
-
         }
         width: 5rem;
-
     }
-
 }

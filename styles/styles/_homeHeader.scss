@@ -1,12 +1,10 @@
 .home-header-container {
-
     background-color: #000;
     border-bottom: 2rem solid #d3b95c;
     height: 34rem;
     position: relative;
 
     header {
-
         align-content: center;
         align-items: center;
         display: flex;
@@ -16,13 +14,10 @@
         z-index: 1;
 
         &::after {
-
             background: {
-
                 image: url('/client/images/header.jpg');
                 position: 50% 50%;
                 size: cover;
-
             }
             bottom: 0;
             content: '';
@@ -31,53 +26,36 @@
             position: absolute;
             right: 0;
             top: 0;
-
         }
-
     }
 
     h1 {
-
         @include container-content();
 
         color: #d3b95c;
         font: {
-
             family: 'Josefin Slab';
             size: 4.5rem;
             weight: normal;
-
         }
         z-index: 1;
 
         span {
-
             display: block;
-
         }
 
         .tagline {
-
             font-size: 3rem;
-
         }
-
     }
 
     @media (min-width: $breakpoint-large) {
-
         height: 43.75rem;
 
         h1 {
-
             .tagline {
-
                 font-size: 4rem;
-
             }
-
         }
-
     }
-
 }
