@@ -3,8 +3,6 @@ var rewire = require('rewire');
 
 var path = require('path');
 
-var Project = require('../../models/project');
-
 var projectCollection = 'projects';
 var getRewiredProjectService = function () {
     return rewire(
@@ -17,7 +15,7 @@ var mockProjectServiceWithError = function () {
     var projectService = getRewiredProjectService();
 
     projectService.__set__('websiteRepository', {
-        upsertOne: function (b, p, cb) {
+        upsertOne: function (b, t, p, cb) {
             cb({});
         },
         getOne: function (b, q, i, cb) {

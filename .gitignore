@@ -27,6 +27,8 @@ bower_components
 
 # Dev stuff
 .restart
+.keys
 client/styles
 client/scripts
 styles/lib
+.idea/

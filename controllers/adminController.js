@@ -6,12 +6,20 @@ var Blog = require('../models/blog');
 var projectService = require('../services/projectService');
 var blogService = require('../services/blogService');
 
+function ensureAuthenticated(req, res, next) {
+    if (req.user && req.user.role === 'admin') { 
+        return next(); 
+    }
+
+    res.redirect('/?login=failed');
+}
+
 module.exports = function (app) {
-    app.get('/admin', function (req, res) {
+    app.get('/admin', ensureAuthenticated, function (req, res) {
         res.render('admin/index.hbs');
     });
 
-    app.get('/admin/projects', function (req, res) {
+    app.get('/admin/projects', ensureAuthenticated, function (req, res) {
         projectService.getRecent(
             req.query.page || 0, 
             true,
@@ -26,7 +34,7 @@ module.exports = function (app) {
             });
     });
 
-    app.get('/admin/project/:projectId', function (req, res) {
+    app.get('/admin/project/:projectId', ensureAuthenticated, function (req, res) {
         if (req.params.projectId === 'new') {
             res.render('admin/project.hbs', new Project());
         } else {
@@ -47,7 +55,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/admin/project/delete/:projectId', function (req, res) {
+    app.get('/admin/project/delete/:projectId', ensureAuthenticated, function (req, res) {
         projectService.deleteOne(
             req.params.projectId, 
             function (err) {
@@ -55,7 +63,7 @@ module.exports = function (app) {
             });
     });
 
-    app.post('/admin/project/:projectId', urlBodyParser, function (req, res) {
+    app.post('/admin/project/:projectId', ensureAuthenticated, urlBodyParser, function (req, res) {
         var b = req.body;
         b._id = b._id ? 
             new ObjectId(b._id) : 
@@ -66,7 +74,7 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/admin/blogs', function (req, res) {
+    app.get('/admin/blogs', ensureAuthenticated, function (req, res) {
         blogService.getRecent(
             req.query.page || 0, 
             true,
@@ -81,7 +89,7 @@ module.exports = function (app) {
             });
     });
 
-    app.get('/admin/blog/:blogId', function (req, res) {
+    app.get('/admin/blog/:blogId', ensureAuthenticated, function (req, res) {
         if (req.params.blogId === 'new') {
             res.render('admin/blog.hbs', new Blog());
         } else {
@@ -102,7 +110,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/admin/blog/delete/:blogId', function (req, res) {
+    app.get('/admin/blog/delete/:blogId', ensureAuthenticated, function (req, res) {
         blogService.deleteOne(
             req.params.blogId, 
             function (err) {
@@ -110,7 +118,7 @@ module.exports = function (app) {
             });
     });
 
-    app.post('/admin/blog/:blogId', urlBodyParser, function (req, res) {
+    app.post('/admin/blog/:blogId', ensureAuthenticated, urlBodyParser, function (req, res) {
         var b = req.body;
         b._id = b._id ? 
             new ObjectId(b._id) : 

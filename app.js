@@ -1,9 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var config = JSON.parse(
-    fs.readFileSync(
-        './config.json'));
+var config = require('./repositories/configurationRepository');
 
 var express = require('express');
 var app = express();
@@ -38,8 +36,10 @@ app.get('/', function (req, res) {
         });
 });
 
+require('./controllers/authController')(app);
 require('./controllers/projectController')(app);
 require('./controllers/blogController')(app);
+require('./controllers/adminController')(app);
 
 app.get('/about', function (req, res) {
     res.render('about.hbs', {
@@ -50,7 +50,7 @@ app.get('/about', function (req, res) {
     });
 });
 
-var server = app.listen(config.port, function () {
+var server = app.listen(config.main.port, function () {
     var host = server.address().address;
     var port = server.address().port;
 

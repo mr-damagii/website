@@ -3,8 +3,6 @@ var rewire = require('rewire');
 
 var path = require('path');
 
-var Blog = require('../../models/blog');
-
 var blogCollection = 'blogs';
 var getRewiredBlogService = function () {
     return rewire(
@@ -17,7 +15,7 @@ var mockBlogServiceWithError = function () {
     var blogService = getRewiredBlogService();
 
     blogService.__set__('websiteRepository', {
-        upsertOne: function (b, p, cb) {
+        upsertOne: function (b, t, p, cb) {
             cb({});
         },
         getOne: function (b, q, i, cb) {

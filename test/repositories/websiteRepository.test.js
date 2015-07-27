@@ -193,7 +193,7 @@ describe('websiteRepository', function () {
         it('should supply an error to the callback if a database exception occurs',
             function (done) {
                 var websiteRepository = mockWebsiteRepositoryWithDatabaseConnectionError();
-                websiteRepository.upsertOne('test', {}, function (err, col, d) {
+                websiteRepository.upsertOne('test', false, {}, function (err, col, d) {
                     err.should.be.ok;
 
                     done();
@@ -208,7 +208,7 @@ describe('websiteRepository', function () {
                     calls++;
                 });
 
-                websiteRepository.upsertOne('test', { _id: '' }, function (err, col, d) {
+                websiteRepository.upsertOne('test', false, { _id: '' }, function (err, col, d) {
                     calls.should.equal(1);
                     
                     done();
@@ -219,7 +219,7 @@ describe('websiteRepository', function () {
             function (done) {
                 var websiteRepository = mockWebsiteRepositoryWithCollectionOperationError();
 
-                websiteRepository.upsertOne('test', { _id: '' }, function (err) {
+                websiteRepository.upsertOne('test', false, { _id: '' }, function (err) {
                     err.should.be.ok;
 
                     done();

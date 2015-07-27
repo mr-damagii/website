@@ -110,7 +110,6 @@ module.exports = function(grunt) {
         concurrent: {
             dev: [
                 'nodemon:dev',
-                'nodemon:admin',
                 'watch'
             ],
             prod: [

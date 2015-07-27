@@ -34,7 +34,7 @@ var _openConn = function (collection, cb) {
 };
 
 module.exports = {
-    upsertOne: function (col, doc, cb) {
+    upsertOne: function (col, updateLastModified, doc, cb) {
         _openConn(col, function (err, collection, done) {
             if (err) {
                 cb(err);
@@ -46,10 +46,14 @@ module.exports = {
 
             collection.updateOne({
                 _id: doc._id
-            }, {
-                $set: doc,
-                $currentDate: { lastModified: true }
-            }, {
+            }, updateLastModified ? {
+                    $set: doc,
+                    $currentDate: { lastModified: true }
+                } : 
+                {
+                    $set: doc
+                }, 
+            {
                 upsert: true
             }, function (err) {
                 if (err) {

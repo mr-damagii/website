@@ -19,6 +19,7 @@ module.exports = {
     upsertOne: function (proj, cb) {
         websiteRepository.upsertOne(
             blogCollection,
+            true,
             proj,
             cb);
     },
