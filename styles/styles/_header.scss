@@ -15,12 +15,15 @@
         text-transform: uppercase;
         z-index: 1;
 
-        picture {
+        .header-background {
+            background: {
+                position: 50% 50%;
+                size: cover;
+            }
             bottom: 0;
             content: '';
             left: 0;
             opacity: 0.35;
-            overflow: hidden;
             position: absolute;
             right: 0;
             top: 0;
