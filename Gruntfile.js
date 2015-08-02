@@ -1,141 +1,126 @@
 module.exports = function(grunt) {
+    require('load-grunt-tasks')(grunt);
+
     grunt.initConfig({
         copy: {
-            dev: {
-                files: [
-                    {
-                        cwd: './bower_components/bourbon/app/assets/stylesheets/',
-                        expand: true,
-                        src: ['**/*.scss'],
-                        dest: './styles/lib/bourbon/'
-                    },
-                    {
-                        cwd: './bower_components/neat/app/assets/stylesheets/',
-                        expand: true,
-                        src: ['**/*.scss'],
-                        dest: './styles/lib/neat/'
-                    },
-                    {
-                        src: './bower_components/normalize.css/normalize.css',
-                        dest: './styles/lib/normalize.css/normalize.css'
-                    },
-                    {
-                        src: './bower_components/normalize.css/normalize.css',
-                        dest: './client/styles/lib/normalize.css/normalize.css'
-                    }
-                ]
+            styles: {
+                files: [{
+                    cwd: './bower_components/bourbon/app/assets/stylesheets/',
+                    expand: true,
+                    src: [ '**/*.scss' ],
+                    dest: './styles/lib/bourbon/'
+                }, {
+                    cwd: './bower_components/neat/app/assets/stylesheets/',
+                    expand: true,
+                    src: [ '**/*.scss' ],
+                    dest: './styles/lib/neat/'
+                }, {
+                    src: './bower_components/normalize.css/normalize.css',
+                    dest: './styles/lib/normalize.css/normalize.css'
+                }, {
+                    src: './bower_components/normalize.css/normalize.css',
+                    dest: './client/styles/lib/normalize.css/normalize.css'
+                }]
             }
         },
         sass: {
             dev: {
-                files: {
-                    './client/styles/styles.css': './styles/styles.scss'
-                }
+                files: [{
+                    expand: true,
+                    cwd: 'styles',
+                    src: [ '*.scss' ],
+                    dest: 'client/styles'
+                }]
             }
         },
-        mochaTest: {
-            dev: {
-                src: [
-                    'test/**/*.test.js'
-                ]
+        watch: {
+            styles: {
+                files: 'styles/**/*.scss',
+                tasks: [ 'sass:dev' ]
+            },
+            server: {
+                files: [ '.rebooted' ],
+                tasks: [ 'sass:dev' ]
             }
         },
-        "file-creator": {
+        'node-inspector': {
             dev: {
-                './.restart': function(fs, fd, done) {
-                    fs.writeSync(fd, '');
-                    done();
+                options: {
+                    'web-port': 10055,
+                    'web-host': 'localhost',
+                    hidden: [ 'node_modules' ]
                 }
             }
         },
         nodemon: {
             dev: {
                 script: 'app.js',
-                options: {
-                    nodeArgs: ['--harmony'],
-                    watch: [
-                        'app.js',
-                        './.restart'
-                    ]
-                }
-            },
-            admin: {
-                script: 'admin.js',
-                options: {
-                    nodeArgs: ['--harmony'],
-                    watch: [
-                        'admin.js'
-                    ]
-                }
-            },
-            prod: {
-                script: 'app.js',
-                options: {
-                    nodeArgs: ['--harmony']
-                }
-            }
-        },
-        watch: {
-            styles: {
-                files: [
-                    './styles/**/*.scss', 
-                    './styles/**/*.sass', 
-                    './styles/**/*.css'
+                ignore: [
+                    'node_modules/**/*',
+                    'bower_components/**/*',
+                    '.design/**/*',
+                    '.keys/**/*',
+                    '.sass-cache/**/*',
+                    'test/**/*',
+                    '.gitignore',
+                    '.gitattributes'
                 ],
-                tasks: [
-                    'sass'
-                ]
-            },
-            server: {
-                files: [
-                    './views/**/*',
-                    './app.js'
-                ],
-                tasks: [
-                    'file-creator'
-                ]
+                ext: 'js,hbs',
+                options: {
+                    nodeArgs: [
+                        '--harmony',
+                        '--debug'
+                    ],
+                    logConcurrentOutput: true,
+                    callback: function (nodemon) {
+                        nodemon.on('config:update', function () {
+                            setTimeout(function () {
+                                require('open')('http://localhost:10054');
+                            }, 1000);
+                        });
+
+                        nodemon.on('restart', function () {
+                            setTimeout(function () {
+                                require('fs').writeFileSync('.rebooted', 'rebooted');
+                            }, 1000);
+                        });
+                    }
+                }
             }
         },
         browserSync: {
             bsFiles: {
-                src : [
-                    './client/**/*',
-                    './.restart'
+                src: [
+                    'client/**/*',
+                    '.rebooted'
                 ]
             },
             options: {
-                watchTask: true
+                watchTask: true,
+                files: 'styles/**/*.scss',
+                tasks: [ 'sass' ]
             }
         },
         concurrent: {
-            dev: [
-                'nodemon:dev',
-                'watch'
-            ],
-            prod: [
-                'nodemon:prod'
-            ],
-            options: {
-                logConcurrentOutput: true
+            server: {
+                tasks: [
+                    'node-inspector',
+                    'watch:server',
+                    'watch:styles',
+                    'nodemon:dev'
+                ],
+                options: {
+                    logConcurrentOutput: true
+                }
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-nodemon');
-    grunt.loadNpmTasks('grunt-concurrent');
-    grunt.loadNpmTasks('grunt-browser-sync');
-    grunt.loadNpmTasks('grunt-file-creator');
-    grunt.loadNpmTasks('grunt-text-replace');
-    grunt.loadNpmTasks('grunt-mocha-test');
-
     grunt.registerTask('default', [
-        'copy',
-        'sass',
+        'copy:styles',
+        'sass:dev',
         'browserSync',
-        'concurrent:dev'
+        'concurrent'
     ]);
 
     grunt.registerTask('test', [

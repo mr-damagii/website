@@ -1,5 +1,5 @@
 {
-    "port": 1337,
+    "port": 10054,
     "local": true,
     "databaseConnectionString": "mongodb://localhost:27017/website"
 }
