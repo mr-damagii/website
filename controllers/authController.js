@@ -10,7 +10,7 @@ var adminService = require('../services/adminService');
 
 var ObjectId = require('mongodb').ObjectID;
 
-module.exports = function (app) {
+module.exports = function (app, logger) {
     passport.serializeUser(function(user, done) {
         done(null, user.google.id);
     });
@@ -19,6 +19,10 @@ module.exports = function (app) {
         adminService.getOne(
             { 'google.id': id },
             function (err, usr) {
+                if (err) {
+                    logger.error('Error while trying to deserialize user with id - %s', id + '');
+                }
+
                 done(err, usr);
             });
     });
@@ -31,7 +35,7 @@ module.exports = function (app) {
         new GoogleStrategy({
             clientID: config.keys.google['client_id'],
             clientSecret: config.keys.google['client_secret'],
-            callbackURL: "http://localhost:1337/auth/google/callback"
+            callbackURL: config.main.googleAuthCallbackUrl
         },
         function (req, token, refreshToken, profile, done) {
             // asynchronous verification, for effect...
@@ -40,6 +44,8 @@ module.exports = function (app) {
                     { 'google.id': profile.id },
                     function (err, usr) {
                         if (err) {
+                            logger.error('Error while trying to get user from database - %j', err);
+
                             return done(err);
                         }
 
@@ -48,14 +54,14 @@ module.exports = function (app) {
 
                             adminService.upsertOne(usr, function (err) {
                                 if (err) {
+                                    logger.error('Error while trying to upsert user into database - %j', err);
+
                                     return done(err);
                                 }
 
                                 done(null, usr);
                             });
                         } else {
-                            console.log(profile);
-
                             var newUser = new Admin({
                                 _id: new ObjectId(),
                                 google: {
@@ -68,6 +74,8 @@ module.exports = function (app) {
 
                             adminService.upsertOne(newUser, function (err) {
                                 if (err) {
+                                    logger.error('Error while trying to upsert user into database - %j', err);
+
                                     return done(err);
                                 }
 

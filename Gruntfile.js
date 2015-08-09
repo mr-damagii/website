@@ -29,7 +29,8 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: 'styles',
                     src: [ '*.scss' ],
-                    dest: 'client/styles'
+                    dest: 'client/styles',
+                    ext: '.css'
                 }]
             }
         },
@@ -65,7 +66,7 @@ module.exports = function(grunt) {
                     '.gitignore',
                     '.gitattributes'
                 ],
-                ext: 'js,hbs',
+                ext: 'js,hbs,json',
                 options: {
                     nodeArgs: [
                         '--harmony',

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    {{> head this}}
+
+    <body>
+        {{> openingScripts}}
+
+        <div class="container error-500">
+            {{> nav}}
+
+            {{> header header}}
+
+            <section>
+                <h1>There was a problem while trying to fetch this page.</h1>
+
+                <div class="nothing-icon">
+                    {{> icons/nothing}}
+                </div>
+            </section>
+
+            {{> footer}}
+        </div>
+
+        {{> scripts}}
+    </body>
+</html>

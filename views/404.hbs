@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    {{> head this}}
+
+    <body>
+        {{> openingScripts}}
+
+        <div class="container error-404">
+            {{> nav}}
+
+            {{> header header}}
+
+            <section>
+                <h1>This page doesn't exist.</h1>
+
+                <div class="nothing-icon">
+                    {{> icons/nothing}}
+                </div>
+            </section>
+
+            {{> footer}}
+        </div>
+
+        {{> scripts}}
+    </body>
+</html>

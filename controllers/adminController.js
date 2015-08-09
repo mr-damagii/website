@@ -6,15 +6,21 @@ var Blog = require('../models/blog');
 var projectService = require('../services/projectService');
 var blogService = require('../services/blogService');
 
-function ensureAuthenticated(req, res, next) {
-    if (req.user && req.user.role === 'admin') { 
-        return next(); 
+var routeErrorHelper = require('../helpers/routeErrorHelper');
+
+module.exports = function (app, logger) {
+    function ensureAuthenticated(req, res, next) {
+        if (req.user &&
+            req.user.role === 'admin') {
+
+            return next();
+        }
+
+        logger.info('Administration request attempt failed - "%s"', req.ip + '');
+
+        res.redirect('/?login=failed');
     }
 
-    res.redirect('/?login=failed');
-}
-
-module.exports = function (app) {
     app.get('/admin', ensureAuthenticated, function (req, res) {
         res.render('admin/index.hbs');
     });
@@ -24,12 +30,16 @@ module.exports = function (app) {
             req.query.page || 0, 
             true,
             function (err, projects) {
+                if (err) {
+                    routeErrorHelper.handleErrorNoOp(err, req, res, logger);
+                }
+
                 res.render('admin/projects.hbs', {
                     header: {
                         title: 'Projects',
                         summary: ''
                     },
-                    projects: projects
+                    projects: projects || []
                 });
             });
     });
@@ -45,9 +55,11 @@ module.exports = function (app) {
                 true,
                 function (err, proj) {
                     if (err) {
-                        throw err;
+                        return routeErrorHelper.handleErrorAs500(err, req, res, logger);
+                    }
 
-                        return;
+                    if (typeof proj === 'undefined') {
+                        return routeErrorHelper.handleErrorAs404(new Error('Project not found'), req, res, logger);
                     }
 
                     res.render('admin/project.hbs', proj);
@@ -59,6 +71,12 @@ module.exports = function (app) {
         projectService.deleteOne(
             req.params.projectId, 
             function (err) {
+                if (err) {
+                    return routeErrorHelper.handleErrorNoOp(err, req, res, logger, function (err, req, res) {
+                        res.redirect('/admin/projects?error=' + encodeURIComponent(err.message));
+                    });
+                }
+
                 res.redirect('/admin/projects');
             });
     });
@@ -70,6 +88,12 @@ module.exports = function (app) {
             new ObjectId();
 
         projectService.upsertOne(b, function (err) {
+            if (err) {
+                return routeErrorHelper.handleErrorNoOp(err, req, res, logger, function (err, req, res) {
+                    res.status(500).json(err);
+                });
+            }
+
             res.redirect('/admin/projects');
         });
     });
@@ -79,12 +103,16 @@ module.exports = function (app) {
             req.query.page || 0, 
             true,
             function (err, blogs) {
+                if (err) {
+                    return routeErrorHelper.handleErrorAs500(err, req, res, logger);
+                }
+
                 res.render('admin/blogs.hbs', {
                     header: {
                         title: 'Blogs',
                         summary: ''
                     },
-                    blogs: blogs
+                    blogs: blogs || []
                 });
             });
     });
@@ -100,9 +128,11 @@ module.exports = function (app) {
                 true,
                 function (err, blog) {
                     if (err) {
-                        throw err;
+                        return routeErrorHelper.handleErrorAs500(err, req, res, logger);
+                    }
 
-                        return;
+                    if (typeof blog === 'undefined') {
+                        return routeErrorHelper.handleErrorAs404(new Error('Blog not found'), req, res, logger);
                     }
 
                     res.render('admin/blog.hbs', blog);
@@ -114,6 +144,12 @@ module.exports = function (app) {
         blogService.deleteOne(
             req.params.blogId, 
             function (err) {
+                if (err) {
+                    return routeErrorHelper.handleErrorNoOp(err, req, res, logger, function (err, req, res) {
+                        res.redirect('/admin/blogs?error=' + encodeURIComponent(err.message));
+                    });
+                }
+
                 res.redirect('/admin/blogs');
             });
     });
@@ -125,6 +161,12 @@ module.exports = function (app) {
             new ObjectId();
 
         blogService.upsertOne(b, function (err) {
+            if (err) {
+                return routeErrorHelper.handleErrorNoOp(err, req, res, logger, function (err, req, res) {
+                    res.status(500).json(err);
+                });
+            }
+
             res.redirect('/admin/blogs');
         });
     });

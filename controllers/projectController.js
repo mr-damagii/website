@@ -1,11 +1,17 @@
 var projectService = require('../services/projectService')
 
-module.exports = function (app) {
+var routeErrorHelper = require('../helpers/routeErrorHelper');
+
+module.exports = function (app, logger) {
     app.get('/projects', function (req, res) {
         projectService.getRecent(
             req.query.page || 0, 
             false,
             function (err, projects) {
+                if (err) {
+                    return routeErrorHelper.handleErrorAs500(err, req, res, logger);
+                }
+
                 res
                     .status(projects.length ? 200 : 404)
                     .render('projects.hbs', {
@@ -14,7 +20,7 @@ module.exports = function (app) {
                             title: 'Projects',
                             summary: ''
                         },
-                        projects: projects
+                        projects: projects || []
                     });
             });
     });
@@ -27,9 +33,11 @@ module.exports = function (app) {
             false,
             function (err, proj) {
                 if (err) {
-                    throw err;
+                    return routeErrorHelper.handleErrorAs500(err, req, res, logger);
+                }
 
-                    return;
+                if (typeof proj === 'undefined') {
+                    return routeErrorHelper.handleErrorAs404(new Error('Project not found'), req, res, logger);
                 }
 
                 proj.pagetitle = proj.title;
