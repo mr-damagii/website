@@ -34,6 +34,14 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        mochaTest: {
+            test: {
+                options: {
+                    reporter: 'spec'
+                },
+                src: ['test/**/*.test.js']
+            }
+        },
         watch: {
             styles: {
                 files: 'styles/**/*.scss',
@@ -120,15 +128,18 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'copy:styles',
         'sass:dev',
+        'mochaTest'
+    ]);
+
+    grunt.registerTask('dev', [
+        'copy:styles',
+        'sass:dev',
+        'mochaTest',
         'browserSync',
         'concurrent'
     ]);
 
     grunt.registerTask('test', [
         'mochaTest'
-    ]);
-
-    grunt.registerTask('prod', [
-        'concurrent:prod'
     ]);
 };
