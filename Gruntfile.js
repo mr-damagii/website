@@ -2,144 +2,98 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
+        dirs: {
+            bower: 'bower_components/',
+            npm: 'node_modules/',
+            sass: '.sass-cache/',
+            keys: '.keys/',
+            designs: '.design/',
+            reboot: 'build/.reboot',
+            build: {
+                base: 'build/',
+                pub: 'build/public/',
+                styles: 'build/styles/'
+            },
+            docs: 'docs/',
+            src: {
+                base: 'src/',
+                styles: 'src/styles/'
+            },
+            tests: 'test/',
+            tools: 'tools/',
+            usr: 'usr/'
+        },
+        clean: {
+            build: {
+                src: [ '<%= dirs.build.base %>**/*' ]
+            }
+        },
         copy: {
-            styles: {
+            build: {
                 files: [{
-                    cwd: './bower_components/bourbon/app/assets/stylesheets/',
+                    cwd: '<%= dirs.src.base %>',
                     expand: true,
-                    src: [ '**/*.scss' ],
-                    dest: './styles/lib/bourbon/'
+                    src: [ '**/*' ],
+                    dest: '<%= dirs.build.base %>'
                 }, {
-                    cwd: './bower_components/neat/app/assets/stylesheets/',
-                    expand: true,
-                    src: [ '**/*.scss' ],
-                    dest: './styles/lib/neat/'
-                }, {
-                    src: './bower_components/normalize.css/normalize.css',
-                    dest: './styles/lib/normalize.css/normalize.css'
-                }, {
-                    src: './bower_components/normalize.css/normalize.css',
-                    dest: './client/styles/lib/normalize.css/normalize.css'
+                    src: '<%= dirs.bower %>normalize.css/normalize.css',
+                    dest: '<%= dirs.build.styles %>normalize.css/normalize.css'
                 }]
             }
         },
         sass: {
-            dev: {
+            build: {
+                options: {
+                    style: 'expanded',
+                    loadPath: [
+                        '<%= dirs.src.styles %>',
+                        '<%= dirs.bower %>',
+                        '<%= dirs.npm %>'
+                    ]
+                },
                 files: [{
                     expand: true,
-                    cwd: 'styles',
-                    src: [ '*.scss' ],
-                    dest: 'client/styles',
+                    cwd: '<%= dirs.src.styles %>',
+                    src: [
+                        '*.scss',
+                        '*.sass'
+                    ],
+                    dest: '<%= dirs.build.styles %>',
                     ext: '.css'
                 }]
             }
         },
         mochaTest: {
-            test: {
-                options: {
-                    reporter: 'spec'
-                },
-                src: ['test/**/*.test.js']
-            }
-        },
-        watch: {
-            styles: {
-                files: 'styles/**/*.scss',
-                tasks: [ 'sass:dev' ]
-            },
-            server: {
-                files: [ '.rebooted' ],
-                tasks: [ 'sass:dev' ]
-            }
-        },
-        'node-inspector': {
-            dev: {
-                options: {
-                    'web-port': 10055,
-                    'web-host': 'localhost',
-                    hidden: [ 'node_modules' ]
-                }
-            }
-        },
-        nodemon: {
-            dev: {
-                script: 'app.js',
-                ignore: [
-                    'node_modules/**/*',
-                    'bower_components/**/*',
-                    '.design/**/*',
-                    '.keys/**/*',
-                    '.sass-cache/**/*',
-                    'test/**/*',
-                    '.gitignore',
-                    '.gitattributes'
-                ],
-                ext: 'js,hbs,json',
-                options: {
-                    nodeArgs: [
-                        '--harmony',
-                        '--debug'
-                    ],
-                    logConcurrentOutput: true,
-                    callback: function (nodemon) {
-                        nodemon.on('config:update', function () {
-                            setTimeout(function () {
-                                require('open')('http://localhost:10054');
-                            }, 1000);
-                        });
-
-                        nodemon.on('restart', function () {
-                            setTimeout(function () {
-                                require('fs').writeFileSync('.rebooted', 'rebooted');
-                            }, 1000);
-                        });
-                    }
-                }
-            }
-        },
-        browserSync: {
-            bsFiles: {
+            build: {
                 src: [
-                    'client/**/*',
-                    '.rebooted'
+                    '<%= dirs.tests %>**/*-test.js'
                 ]
-            },
-            options: {
-                watchTask: true,
-                files: 'styles/**/*.scss',
-                tasks: [ 'sass' ]
-            }
-        },
-        concurrent: {
-            server: {
-                tasks: [
-                    'node-inspector',
-                    'watch:server',
-                    'watch:styles',
-                    'nodemon:dev'
-                ],
-                options: {
-                    logConcurrentOutput: true
-                }
             }
         }
     });
 
-    grunt.registerTask('default', [
-        'copy:styles',
-        'sass:dev',
-        'mochaTest'
+    grunt.registerTask('build', [
+        'copy:build',
+        'sass:build'
     ]);
 
-    grunt.registerTask('dev', [
-        'copy:styles',
-        'sass:dev',
-        'mochaTest',
-        'browserSync',
-        'concurrent'
+    grunt.registerTask('clear', [
+        'clean:build'
+    ]);
+
+    grunt.registerTask('rebuild', [
+        'clean:build',
+        'copy:build',
+        'sass:build'
+    ]);
+
+    grunt.registerTask('release', [
+        'clean:build',
+        'copy:build',
+        'sass:build'
     ]);
 
     grunt.registerTask('test', [
-        'mochaTest'
+        'mochaTest:build'
     ]);
 };

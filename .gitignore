@@ -26,9 +26,6 @@ bower_components
 .sass-cache
 
 # Dev stuff
-.rebooted
 .keys
-client/styles
-client/scripts
-styles/lib
-.idea/
+.idea
+build

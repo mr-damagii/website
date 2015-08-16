@@ -2,10 +2,10 @@
     "port": 10054,
     "local": true,
     "databaseConnectionString": "mongodb://localhost:27017/website",
-    "googleAuthCallbackUrl": "http://localhost:1337/auth/google/callback",
+    "googleAuthCallbackUrl": "http://localhost:10054/auth/google/callback",
     "logging": {
         "level": "warn",
-        "file": "logs/app.log",
+        "file": "./server.log",
         "maxSize": 104857600,
         "zipArchive": true
     }
